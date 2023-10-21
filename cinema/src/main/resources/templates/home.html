@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="https://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      action="#"
+      th:action="@{/upload}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <input type="file" name="image" placeholder="upload file" />
+      <input type="submit" value="Submit" />
+    </form>
+    <div th:each="movie: ${movies}">
+      <div th:text="${movie.title}"></div>
+      <img th:src="${movie.imageURL}" style="width: 100%" />
+    </div>
+  </body>
+</html>
