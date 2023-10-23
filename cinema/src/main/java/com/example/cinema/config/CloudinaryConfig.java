@@ -1,4 +1,4 @@
-package com.example.cinema;
+package com.example.cinema.config;
 
 import java.util.HashMap;
 import java.util.Map;

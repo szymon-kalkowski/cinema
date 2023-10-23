@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      action="#"
+      th:action="@{/add-actor}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <input type="text" name="name" placeholder="name" />
+      <input type="number" name="birthYear" placeholder="birth year" />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <div th:each="actor: ${actors}">
+      <div th:text="${actor.name}"></div>
+      <div th:text="${actor.birthYear}"></div>
+    </div>
+
+    <form
+      action="#"
+      th:action="@{/upload-movie}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <input type="text" name="title" placeholder="title" />
+      <input type="number" name="duration" placeholder="duration" />
+      <input type="number" name="year" placeholder="year" />
+      <input type="file" name="image" placeholder="upload file" />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

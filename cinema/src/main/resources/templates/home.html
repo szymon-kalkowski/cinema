@@ -6,15 +6,9 @@
     <title>Document</title>
   </head>
   <body>
-    <form
-      action="#"
-      th:action="@{/upload}"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <input type="file" name="image" placeholder="upload file" />
-      <input type="submit" value="Submit" />
-    </form>
+    <nav>
+      <a href="/add-movie">Add Movie</a>
+    </nav>
     <div th:each="movie: ${movies}">
       <div th:text="${movie.title}"></div>
       <img th:src="${movie.imageURL}" style="width: 100%" />

@@ -1,4 +1,4 @@
-package com.example.cinema.movie;
+package com.example.cinema.models;
 
 import java.util.List;
 
@@ -13,16 +13,18 @@ public class Movie {
     @Id
     private String id;
     private String title;
+    private String description;
     private List<Genre> genres;
     private int duration;
     private int year;
-    private List<Director> directors;
-    private List<Actor> actors;
+    private List<String> directors;
+    private List<String> actors;
     private String imageURL;
 
-    public Movie(String title, List<Genre> genres, int duration, int year, List<Director> directors,
-            List<Actor> actors, String imageURL) {
+    public Movie(String title, String description, List<Genre> genres, int duration, int year, List<String> directors,
+            List<String> actors, String imageURL) {
         this.title = title;
+        this.description = description;
         this.genres = genres;
         this.duration = duration;
         this.year = year;

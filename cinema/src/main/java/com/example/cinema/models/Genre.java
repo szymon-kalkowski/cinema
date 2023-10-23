@@ -1,4 +1,4 @@
-package com.example.cinema.movie;
+package com.example.cinema.models;
 
 public enum Genre {
     ACTION, COMEDY, DRAMA, HORROR, THRILLER, WESTERN, FAMILY, ROMANCE, DOCUMENTARY, ANIMATION, SCI_FI, FANTASY,

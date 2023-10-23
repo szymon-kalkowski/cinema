@@ -1,4 +1,4 @@
-package com.example.cinema;
+package com.example.cinema.models;
 
 import java.io.IOException;
 
