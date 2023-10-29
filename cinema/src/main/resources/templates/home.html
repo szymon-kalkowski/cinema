@@ -11,6 +11,18 @@
     </nav>
     <div th:each="movie: ${movies}">
       <div th:text="${movie.title}"></div>
+      <div th:text="${movie.description}"></div>
+      <div th:text="${movie.year}"></div>
+      <div th:text="${movie.duration}"></div>
+      <div th:each="genre: ${movie.genres}">
+        <div th:text="${genre}"></div>
+      </div>
+      <div th:each="actor: ${movie.actors}">
+        <div th:text="${actor.name}"></div>
+      </div>
+      <div th:each="director: ${movie.directors}">
+        <div th:text="${director.name}"></div>
+      </div>
       <img th:src="${movie.imageURL}" style="width: 100%" />
     </div>
   </body>

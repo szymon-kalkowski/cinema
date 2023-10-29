@@ -2,6 +2,7 @@ package com.example.cinema.controllers;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.cinema.models.Actor;
+import com.example.cinema.models.Director;
 import com.example.cinema.models.FileUpload;
 import com.example.cinema.models.Genre;
 import com.example.cinema.models.Movie;
 import com.example.cinema.services.ActorService;
+import com.example.cinema.services.DirectorService;
 import com.example.cinema.services.MovieService;
 
 import org.springframework.ui.Model;
@@ -24,45 +27,57 @@ public class MovieController {
         private final FileUpload fileUpload;
         private final MovieService movieService;
         private final ActorService actorService;
+        private final DirectorService directorService;
 
         @Autowired
-        public MovieController(FileUpload fileUpload, MovieService movieService, ActorService actorService) {
+        public MovieController(FileUpload fileUpload, MovieService movieService, ActorService actorService,
+                        DirectorService directorService) {
                 this.fileUpload = fileUpload;
                 this.movieService = movieService;
                 this.actorService = actorService;
+                this.directorService = directorService;
         }
 
         @GetMapping("/add-movie")
         public String home(Model model) {
+                model.addAttribute("genres", Genre.values());
                 model.addAttribute("actors", actorService.getAllActors());
+                model.addAttribute("directors", directorService.getAllDirectors());
                 return "add-movie";
         }
 
         @PostMapping("/upload-movie")
-        public String uploadFile(@RequestParam("image") MultipartFile multipartFile,
+        public String uploadMovie(@RequestParam("title") String title,
+                        @RequestParam("description") String description,
+                        @RequestParam("genres") List<String> genreStrings,
+                        @RequestParam("duration") int duration,
+                        @RequestParam("year") int year,
+                        @RequestParam("directors") List<String> directorsIds,
+                        @RequestParam("actors") List<String> actorsIds,
+                        @RequestParam("image") MultipartFile multipartFile,
                         Model model) throws IOException {
                 String imageURL = fileUpload.uploadFile(multipartFile);
+                List<Genre> genres = genreStrings.stream()
+                                .map(Genre::valueOf)
+                                .collect(Collectors.toList());
 
-                // List<Director> directors = List.of(
-                // new Director("George Lucas", 1944));
-                // List<Actor> actors = List.of(
-                // new Actor("Mark Hamill", 1951),
-                // new Actor("Harrison Ford", 1942),
-                // new Actor("Carrie Fisher", 1956));
-                List<String> directors = List.of("George Lucas");
-                List<String> actors = List.of("Mark Hamill", "Harrison Ford", "Carrie Fisher");
-                List<Genre> genres = List.of(
-                                Genre.ACTION,
-                                Genre.ADVENTURE,
-                                Genre.FANTASY);
+                List<Director> directors = directorsIds.stream()
+                                .map(directorService::getDirectorById)
+                                .collect(Collectors.toList());
+
+                List<Actor> actors = actorsIds.stream()
+                                .map(actorService::getActorById)
+                                .collect(Collectors.toList());
+
                 Movie movie = new Movie(
-                                "Star Wars: Episode IV - A New Hope",
-                                "Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle station, while also attempting to rescue Princess Leia from the mysterious Darth Vader.",
+                                title,
+                                description,
                                 genres,
-                                121,
-                                1977,
+                                duration,
+                                year,
                                 directors,
-                                actors, imageURL);
+                                actors,
+                                imageURL);
 
                 movieService.createMovie(movie);
                 return "redirect:/";
@@ -74,6 +89,15 @@ public class MovieController {
                         Model model) {
                 Actor actor = new Actor(name, birthYear);
                 actorService.createActor(actor);
+                return "redirect:/";
+        }
+
+        @PostMapping("/add-director")
+        public String addDirector(@RequestParam("name") String name,
+                        @RequestParam("birthYear") int birthYear,
+                        Model model) {
+                Director director = new Director(name, birthYear);
+                directorService.createDirector(director);
                 return "redirect:/";
         }
 }

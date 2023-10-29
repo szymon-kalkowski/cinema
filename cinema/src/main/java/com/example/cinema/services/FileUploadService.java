@@ -21,7 +21,7 @@ public class FileUploadService implements FileUpload {
     public String uploadFile(MultipartFile multipartFile) throws IOException {
         return cloudinary.uploader()
                 .upload(multipartFile.getBytes(),
-                        Map.of("public_id", UUID.randomUUID().toString()))
+                        Map.of("public_id", "cinema/" + UUID.randomUUID().toString()))
                 .get("url")
                 .toString();
     }

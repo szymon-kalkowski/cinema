@@ -17,12 +17,12 @@ public class Movie {
     private List<Genre> genres;
     private int duration;
     private int year;
-    private List<String> directors;
-    private List<String> actors;
+    private List<Director> directors;
+    private List<Actor> actors;
     private String imageURL;
 
-    public Movie(String title, String description, List<Genre> genres, int duration, int year, List<String> directors,
-            List<String> actors, String imageURL) {
+    public Movie(String title, String description, List<Genre> genres, int duration, int year, List<Director> directors,
+            List<Actor> actors, String imageURL) {
         this.title = title;
         this.description = description;
         this.genres = genres;

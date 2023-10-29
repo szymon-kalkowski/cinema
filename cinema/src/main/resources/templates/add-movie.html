@@ -6,20 +6,18 @@
     <title>Document</title>
   </head>
   <body>
-    <form
-      action="#"
-      th:action="@{/add-actor}"
-      method="post"
-      enctype="multipart/form-data"
-    >
-      <input type="text" name="name" placeholder="name" />
-      <input type="number" name="birthYear" placeholder="birth year" />
-      <input type="submit" value="Submit" />
-    </form>
+    <div th:replace="fragments/add-actor.html"></div>
+
+    <div th:replace="fragments/add-director.html"></div>
 
     <div th:each="actor: ${actors}">
       <div th:text="${actor.name}"></div>
       <div th:text="${actor.birthYear}"></div>
+    </div>
+
+    <div th:each="director: ${directors}">
+      <div th:text="${director.name}"></div>
+      <div th:text="${director.birthYear}"></div>
     </div>
 
     <form
@@ -29,8 +27,23 @@
       enctype="multipart/form-data"
     >
       <input type="text" name="title" placeholder="title" />
+      <textarea name="description" placeholder="description"></textarea>
+      <select name="genres" multiple>
+        <option th:each="genre: ${genres}" th:value="${genre}">
+          <div th:text="${genre}"></div>
+        </option>
       <input type="number" name="duration" placeholder="duration" />
       <input type="number" name="year" placeholder="year" />
+      <select name="actors" multiple>
+        <option th:each="actor: ${actors}" th:value="${actor.id}">
+          <div th:text="${actor.name}"></div>
+        </option>
+      </select>
+      <select name="directors" multiple>
+        <option th:each="director: ${directors}" th:value="${director.id}">
+          <div th:text="${director.name}"></div>
+        </option>
+      </select>
       <input type="file" name="image" placeholder="upload file" />
       <input type="submit" value="Submit" />
     </form>
