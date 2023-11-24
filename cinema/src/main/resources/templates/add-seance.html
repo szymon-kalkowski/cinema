@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form
+      action="#"
+      th:action="@{/upload-seance}"
+      method="post"
+      enctype="multipart/form-data"
+    >
+      <select name="movie" multiple>
+        <option th:each="movie: ${movies}" th:value="${movie.id}">
+          <div th:text="${movie.title}"></div>
+        </option>
+      </select>
+      <input type="number" name="room" placeholder="room" />
+      <input type="date" name="date" placeholder="date" />
+      <input type="time" name="time" placeholder="time" />
+
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

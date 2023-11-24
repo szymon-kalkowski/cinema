@@ -6,10 +6,14 @@ import java.time.LocalTime;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Document
 @Data
+@Document
+@AllArgsConstructor
+@NoArgsConstructor
 public class Seance {
     @Id
     private String id;
@@ -19,11 +23,11 @@ public class Seance {
     private LocalTime time;
     private Hall hall;
 
-    public Seance(Movie movie, int room, LocalDate date, LocalTime time) {
+    public Seance(Movie movie, int room, LocalDate date, LocalTime time, Hall hall) {
         this.movie = movie;
         this.room = room;
         this.date = date;
         this.time = time;
-        this.hall = new Hall();
+        this.hall = hall;
     }
 }

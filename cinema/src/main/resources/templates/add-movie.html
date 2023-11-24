@@ -32,6 +32,7 @@
         <option th:each="genre: ${genres}" th:value="${genre}">
           <div th:text="${genre}"></div>
         </option>
+      </select>
       <input type="number" name="duration" placeholder="duration" />
       <input type="number" name="year" placeholder="year" />
       <select name="actors" multiple>
