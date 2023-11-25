@@ -43,4 +43,8 @@ public class Hall {
     public Person getPerson(int row, int col) {
         return seats.get(row).get(col);
     }
+
+    public List<List<Person>> getSeats() {
+        return seats;
+    }
 }

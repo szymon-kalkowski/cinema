@@ -1,9 +1,13 @@
 package com.example.cinema.services;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.example.cinema.models.Movie;
 import com.example.cinema.models.Seance;
 import com.example.cinema.repositories.SeanceRepository;
 
@@ -33,5 +37,16 @@ public class SeanceService {
 
     public void deleteSeance(String id) {
         seanceRepository.deleteById(id);
+    }
+
+    public List<Seance> getSeancesByDate(LocalDate date) {
+        return seanceRepository.findByDate(date);
+    }
+
+    public Map<Movie, List<Seance>> getRepertoire(LocalDate date) {
+        List<Seance> seances = getSeancesByDate(date);
+
+        return seances.stream()
+                .collect(Collectors.groupingBy(Seance::getMovie, Collectors.toList()));
     }
 }

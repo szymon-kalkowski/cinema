@@ -16,45 +16,48 @@
     <div th:replace="fragments/navbar.html"></div>
 
     <div class="container">
-      <h1 class="text-center">Add Seance</h1>
       <form
         action="#"
-        th:action="@{/upload-seance}"
+        th:action="@{/repertoire}"
         method="post"
         enctype="multipart/form-data"
-        class="form-group"
+        class="form-group d-flex"
       >
-        <label for="movie">Movie</label>
-        <select class="form-control my-3" name="movie">
-          <option th:each="movie: ${movies}" th:value="${movie.id}">
-            <div th:text="${movie.title}"></div>
-          </option>
-        </select>
+        <input class="form-control my-3 w-75" type="date" name="date" />
         <input
-          class="form-control my-3"
-          type="number"
-          name="room"
-          placeholder="room"
-        />
-        <input
-          class="form-control my-3"
-          type="date"
-          name="date"
-          placeholder="date"
-        />
-        <input
-          class="form-control my-3"
-          type="time"
-          name="time"
-          placeholder="time"
-        />
-
-        <input
-          class="btn btn-primary w-fit-content d-block mx-auto my-3"
+          class="btn btn-primary w-25 d-block my-3"
           type="submit"
           value="Submit"
         />
       </form>
+
+      <div class="d-flex justify-content-between my-4">
+        <h1>Repertoire</h1>
+        <h1 th:text="${date}"></h1>
+      </div>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Movie</th>
+            <th scope="col">Time</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="entry : ${repertoire}">
+            <td th:text="${entry.key.title}"></td>
+            <td>
+              <a
+                th:each="seance : ${entry.value}"
+                th:href="@{'/seance/' + ${seance.id}}"
+                class="text-decoration-none mx-2"
+              >
+                <span th:text="${seance.time}"></span>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <script

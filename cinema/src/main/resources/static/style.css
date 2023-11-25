@@ -41,4 +41,22 @@ body {
   justify-content: center;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  text-decoration: none;
+  color: black;
+}
+
+.movie:hover {
+  color: black;
+}
+
+.hallRow {
+  height: 40px;
+}
+
+.seat {
+  height: 30px;
+  width: 30px;
+  border: 1px solid black;
+  margin: 2px;
+  border-radius: 3px;
 }

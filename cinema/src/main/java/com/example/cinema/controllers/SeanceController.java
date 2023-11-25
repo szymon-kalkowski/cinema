@@ -5,6 +5,7 @@ import java.time.LocalTime;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -31,6 +32,23 @@ public class SeanceController {
         return "add-seance";
     }
 
+    @GetMapping("/repertoire")
+    public String repertoire() {
+        return "redirect:/repertoire/" + LocalDate.now().toString();
+    }
+
+    @GetMapping("/repertoire/{date}")
+    public String repertoireByDate(@PathVariable("date") String date, Model model) {
+        model.addAttribute("repertoire", seanceService.getRepertoire(LocalDate.parse(date)));
+        model.addAttribute("date", date);
+        return "repertoire";
+    }
+
+    @PostMapping("/repertoire")
+    public String repertoireRedirect(@RequestParam("date") String date) {
+        return "redirect:/repertoire/" + date;
+    }
+
     @PostMapping("/upload-seance")
     public String addSeance(@RequestParam("movie") String movieId,
             @RequestParam("room") int room,
@@ -48,5 +66,13 @@ public class SeanceController {
         seanceService.createSeance(seance);
 
         return "redirect:/";
+    }
+
+    @GetMapping("/seance/{id}")
+    public String getSeance(@PathVariable("id") String id, Model model) {
+        Seance seance = seanceService.getSeanceById(id);
+        model.addAttribute("seance", seance);
+        model.addAttribute("seats", seance.getHall().getSeats());
+        return "seance";
     }
 }
