@@ -54,32 +54,9 @@
           </div>
         </div>
         <div class="col-12">
-          <h1 class="text-center">Seance</h1>
-          <h5 th:text="${'Room: ' + seance.room}"></h5>
-          <div class="d-flex justify-content-between">
-            <h2 th:text="${seance.date}"></h2>
-            <h2 th:text="${seance.time}"></h2>
-          </div>
+          <div th:replace="fragments/seance-info.html"></div>
 
-          <div
-            class="py-2 w-75 d-block mx-auto bg-dark text-white my-3 text-center"
-          >
-            SCREEN
-          </div>
-
-          <div
-            th:each="row, rowIdx : ${seats}"
-            class="d-flex justify-content-center hallRow"
-          >
-            <div th:each="seat, seatIdx : ${row}" class="me-2">
-              <div
-                th:if="${seat}"
-                class="bg-danger hallSeat"
-                th:text="${'Row ' + rowIdx.index + ', Seat ' + seatIdx.index}"
-              ></div>
-              <div th:unless="${seat}" class="bg-success seat"></div>
-            </div>
-          </div>
+          <div th:replace="fragments/order-tickets.html"></div>
         </div>
       </div>
     </div>

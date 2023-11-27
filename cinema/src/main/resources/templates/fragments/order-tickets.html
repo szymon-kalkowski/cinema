@@ -1,0 +1,39 @@
+<h1 class="text-center mt-5">Order tickets</h1>
+<h5 class="text-center mb-2">$10.00/ticket</h5>
+<form
+  action="#"
+  th:action="@{'/seance/' + ${seance.id}}"
+  method="post"
+  enctype="multipart/form-data"
+  class="form-group"
+>
+  <label for="seats" class="form-label fw-bold">Seats</label>
+  <select class="form-control mb-3" name="seats" required multiple>
+    <option
+      th:each="availableSeat: ${availableSeats}"
+      th:value="${availableSeat}"
+      th:text="${availableSeat}"
+    ></option>
+  </select>
+  <label for="name" class="form-label fw-bold">Name and lastname</label>
+  <input
+    class="form-control mb-3"
+    type="text"
+    name="name"
+    placeholder="name"
+    required
+  />
+  <label for="email" class="form-label fw-bold">Email</label>
+  <input
+    class="form-control mb-3"
+    type="email"
+    name="email"
+    placeholder="email"
+    required
+  />
+  <input
+    class="btn btn-primary w-fit-content d-block mx-auto my-3"
+    type="submit"
+    value="Order"
+  />
+</form>

@@ -47,4 +47,16 @@ public class Hall {
     public List<List<Person>> getSeats() {
         return seats;
     }
+
+    public List<String> getAvailableSeats() {
+        List<String> availableSeats = new ArrayList<String>();
+        for (int i = 0; i < seats.size(); i++) {
+            for (int j = 0; j < seats.get(i).size(); j++) {
+                if (isSeatAvailable(j, i)) {
+                    availableSeats.add("row-" + j + "-seat-" + i);
+                }
+            }
+        }
+        return availableSeats;
+    }
 }

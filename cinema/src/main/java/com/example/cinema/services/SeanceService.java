@@ -46,7 +46,13 @@ public class SeanceService {
     public Map<Movie, List<Seance>> getRepertoire(LocalDate date) {
         List<Seance> seances = getSeancesByDate(date);
 
-        return seances.stream()
+        Map<Movie, List<Seance>> groupedSeances = seances.stream()
                 .collect(Collectors.groupingBy(Seance::getMovie, Collectors.toList()));
+
+        groupedSeances.forEach((movie, seancesList) -> {
+            seancesList.sort((s1, s2) -> s1.getTime().compareTo(s2.getTime()));
+        });
+
+        return groupedSeances;
     }
 }

@@ -23,6 +23,10 @@ public class PersonService {
         return personRepository.findById(id).orElse(null);
     }
 
+    public Person getPersonByEmail(String email) {
+        return personRepository.findByEmail(email);
+    }
+
     public Person createPerson(Person person) {
         return personRepository.insert(person);
     }
