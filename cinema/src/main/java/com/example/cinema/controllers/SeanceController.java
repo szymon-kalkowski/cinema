@@ -81,6 +81,12 @@ public class SeanceController {
         return "redirect:/";
     }
 
+    @PostMapping("/delete-seance/{id}")
+    public String deleteSeance(@PathVariable("id") String id) {
+        seanceService.deleteSeance(id);
+        return "redirect:/";
+    }
+
     @GetMapping("/seance/{id}")
     public String getSeance(@PathVariable("id") String id, Model model, @AuthenticationPrincipal OidcUser principal) {
         Seance seance = seanceService.getSeanceById(id);

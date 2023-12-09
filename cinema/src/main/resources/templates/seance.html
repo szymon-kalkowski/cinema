@@ -24,7 +24,18 @@
           />
         </div>
         <div class="col-12 col-lg-6">
-          <h1 th:text="${seance.movie.title}"></h1>
+          <div class="d-flex justify-content-between">
+            <h1 th:text="${seance.movie.title}"></h1>
+            <form
+              th:action="@{/delete-seance/{id}(id=${seance.id})}"
+              method="POST"
+            >
+              <button sec:authorize="isAuthenticated()" class="btn btn-danger">
+                DELETE
+              </button>
+            </form>
+          </div>
+
           <div th:text="${seance.movie.duration + ' min'}" class="my-1"></div>
           <div class="d-flex my-2">
             <span
