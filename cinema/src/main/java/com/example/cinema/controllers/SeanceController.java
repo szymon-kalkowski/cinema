@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,22 +16,22 @@ import com.example.cinema.models.Hall;
 import com.example.cinema.models.Order;
 import com.example.cinema.models.Person;
 import com.example.cinema.models.Seance;
-import com.example.cinema.services.MovieService;
-import com.example.cinema.services.OrderService;
-import com.example.cinema.services.PersonService;
-import com.example.cinema.services.SeanceService;
+import com.example.cinema.services.IMovieService;
+import com.example.cinema.services.IOrderService;
+import com.example.cinema.services.IPersonService;
+import com.example.cinema.services.ISeanceService;
 
 import org.springframework.ui.Model;
 
 @Controller
 public class SeanceController {
-    private final MovieService movieService;
-    private final SeanceService seanceService;
-    private final OrderService orderService;
-    private final PersonService personService;
+    private final IMovieService movieService;
+    private final ISeanceService seanceService;
+    private final IOrderService orderService;
+    private final IPersonService personService;
 
-    public SeanceController(MovieService movieService, SeanceService seanceService, OrderService orderService,
-            PersonService personService) {
+    public SeanceController(IMovieService movieService, ISeanceService seanceService, IOrderService orderService,
+            IPersonService personService) {
         this.movieService = movieService;
         this.seanceService = seanceService;
         this.orderService = orderService;
@@ -37,18 +39,19 @@ public class SeanceController {
     }
 
     @GetMapping("/add-seance")
-    public String addSeance(Model model) {
+    public String addSeance(Model model, @AuthenticationPrincipal OidcUser principal) {
         model.addAttribute("movies", movieService.getAllMovies());
         return "add-seance";
     }
 
     @GetMapping("/repertoire")
-    public String repertoire() {
+    public String repertoire(@AuthenticationPrincipal OidcUser principal) {
         return "redirect:/repertoire/" + LocalDate.now().toString();
     }
 
     @GetMapping("/repertoire/{date}")
-    public String repertoireByDate(@PathVariable("date") String date, Model model) {
+    public String repertoireByDate(@PathVariable("date") String date, Model model,
+            @AuthenticationPrincipal OidcUser principal) {
         model.addAttribute("repertoire", seanceService.getRepertoire(LocalDate.parse(date)));
         model.addAttribute("date", date);
         return "repertoire";
@@ -79,7 +82,7 @@ public class SeanceController {
     }
 
     @GetMapping("/seance/{id}")
-    public String getSeance(@PathVariable("id") String id, Model model) {
+    public String getSeance(@PathVariable("id") String id, Model model, @AuthenticationPrincipal OidcUser principal) {
         Seance seance = seanceService.getSeanceById(id);
         model.addAttribute("seance", seance);
         model.addAttribute("seats", seance.getHall().getSeats());

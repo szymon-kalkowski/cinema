@@ -8,13 +8,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.cloudinary.Cloudinary;
-import com.example.cinema.models.FileUpload;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class FileUploadService implements FileUpload {
+public class FileUploadService implements IFileUpload {
     private final Cloudinary cloudinary;
 
     @Override

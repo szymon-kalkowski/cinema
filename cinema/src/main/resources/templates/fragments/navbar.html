@@ -1,14 +1,33 @@
 <nav class="bg-black p-4 d-flex justify-content-between mb-5">
   <a class="text-white text-decoration-none fw-bold" href="/">Cinema Shitty</a>
   <div>
-    <a class="text-white text-decoration-none mx-2" href="/add-movie"
+    <a
+      sec:authorize="isAuthenticated()"
+      class="text-white text-decoration-none mx-2"
+      href="/add-movie"
       >Add Movie</a
     >
-    <a class="text-white text-decoration-none mx-2" href="/add-seance"
+    <a
+      sec:authorize="isAuthenticated()"
+      class="text-white text-decoration-none mx-2"
+      href="/add-seance"
       >Add Seance</a
     >
     <a class="text-white text-decoration-none mx-2" href="/repertoire"
       >Repertoire</a
     >
+    <a
+      class="text-white text-decoration-none mx-2"
+      sec:authorize="!isAuthenticated()"
+      th:href="@{/oauth2/authorization/okta}"
+      >Login</a
+    >
+    <a
+      class="text-white text-decoration-none mx-2"
+      sec:authorize="isAuthenticated()"
+      th:href="@{/logout}"
+    >
+      Logout
+    </a>
   </div>
 </nav>

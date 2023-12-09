@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,24 +15,24 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.cinema.models.Actor;
 import com.example.cinema.models.Director;
-import com.example.cinema.models.FileUpload;
+import com.example.cinema.services.IFileUpload;
 import com.example.cinema.models.Genre;
 import com.example.cinema.models.Movie;
-import com.example.cinema.services.ActorService;
-import com.example.cinema.services.DirectorService;
-import com.example.cinema.services.MovieService;
+import com.example.cinema.services.IActorService;
+import com.example.cinema.services.IDirectorService;
+import com.example.cinema.services.IMovieService;
 
 import org.springframework.ui.Model;
 
 @Controller
 public class MovieController {
-    private final FileUpload fileUpload;
-    private final MovieService movieService;
-    private final ActorService actorService;
-    private final DirectorService directorService;
+    private final IFileUpload fileUpload;
+    private final IMovieService movieService;
+    private final IActorService actorService;
+    private final IDirectorService directorService;
 
-    public MovieController(FileUpload fileUpload, MovieService movieService, ActorService actorService,
-            DirectorService directorService) {
+    public MovieController(IFileUpload fileUpload, IMovieService movieService, IActorService actorService,
+            IDirectorService directorService) {
         this.fileUpload = fileUpload;
         this.movieService = movieService;
         this.actorService = actorService;
@@ -38,7 +40,7 @@ public class MovieController {
     }
 
     @GetMapping("/add-movie")
-    public String home(Model model) {
+    public String home(Model model, @AuthenticationPrincipal OidcUser principal) {
         model.addAttribute("genres", Genre.values());
         model.addAttribute("actors", actorService.getAllActors());
         model.addAttribute("directors", directorService.getAllDirectors());
@@ -101,7 +103,7 @@ public class MovieController {
     }
 
     @GetMapping("/movie/{id}")
-    public String getMovie(@PathVariable("id") String id, Model model) {
+    public String getMovie(@PathVariable("id") String id, Model model, @AuthenticationPrincipal OidcUser principal) {
         Movie movie = movieService.getMovieById(id);
         model.addAttribute("movie", movie);
         return "movie";

@@ -12,37 +12,44 @@ import com.example.cinema.models.Seance;
 import com.example.cinema.repositories.SeanceRepository;
 
 @Service
-public class SeanceService {
+public class SeanceService implements ISeanceService {
     private final SeanceRepository seanceRepository;
 
     public SeanceService(SeanceRepository seanceRepository) {
         this.seanceRepository = seanceRepository;
     }
 
+    @Override
     public List<Seance> getAllSeances() {
         return seanceRepository.findAll();
     }
 
+    @Override
     public Seance getSeanceById(String id) {
         return seanceRepository.findById(id).orElse(null);
     }
 
+    @Override
     public Seance createSeance(Seance seance) {
         return seanceRepository.insert(seance);
     }
 
+    @Override
     public Seance updateSeance(Seance seance) {
         return seanceRepository.save(seance);
     }
 
+    @Override
     public void deleteSeance(String id) {
         seanceRepository.deleteById(id);
     }
 
+    @Override
     public List<Seance> getSeancesByDate(LocalDate date) {
         return seanceRepository.findByDate(date);
     }
 
+    @Override
     public Map<Movie, List<Seance>> getRepertoire(LocalDate date) {
         List<Seance> seances = getSeancesByDate(date);
 
