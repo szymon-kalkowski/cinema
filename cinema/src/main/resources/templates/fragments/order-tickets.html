@@ -6,9 +6,16 @@
   method="post"
   enctype="multipart/form-data"
   class="form-group"
+  id="order-form"
 >
   <label for="seats" class="form-label fw-bold">Seats</label>
-  <select class="form-control mb-3" name="seats" required multiple>
+  <select
+    class="form-control mb-3"
+    name="seats"
+    required
+    multiple
+    id="order-seats"
+  >
     <option
       th:each="availableSeat: ${availableSeats}"
       th:value="${availableSeat}"
@@ -32,8 +39,42 @@
     required
   />
   <input
+    id="order-btn"
     class="btn btn-primary w-fit-content d-block mx-auto my-3"
-    type="submit"
     value="Order"
   />
 </form>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  const orderForm = document.getElementById("order-form");
+  const orderBtn = document.getElementById("order-btn");
+
+  const onSubmit = () => {
+    const selectElement = document.getElementById("order-seats");
+    const selectedOptions = selectElement.options;
+    const selectedValues = [];
+    for (let i = 0; i < selectedOptions.length; i++) {
+      if (selectedOptions[i].selected) {
+        selectedValues.push(selectedOptions[i].value);
+      }
+    }
+    const ticketsAmount = selectedValues.length;
+    const totalPrice = ticketsAmount * 10;
+    Swal.fire({
+      title: "Make the payment",
+      text: "Total price: $" + totalPrice,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Pay",
+    }).then((result) => {
+      if (result.isConfirmed && orderForm.checkValidity()) {
+        orderForm.submit();
+      }
+    });
+  };
+
+  orderBtn.addEventListener("click", onSubmit);
+</script>

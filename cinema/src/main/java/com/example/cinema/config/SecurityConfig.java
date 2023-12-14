@@ -30,6 +30,8 @@ public class SecurityConfig {
             "/repertoire/**",
             "/movie/**",
             "/seance/**",
+            "/my-orders",
+            "/orders/**",
     };
 
     @Bean
