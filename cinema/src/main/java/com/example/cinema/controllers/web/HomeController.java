@@ -1,4 +1,4 @@
-package com.example.cinema.controllers;
+package com.example.cinema.controllers.web;
 
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;

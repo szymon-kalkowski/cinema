@@ -1,4 +1,4 @@
-package com.example.cinema.controllers;
+package com.example.cinema.controllers.web;
 
 import java.io.IOException;
 import java.util.List;

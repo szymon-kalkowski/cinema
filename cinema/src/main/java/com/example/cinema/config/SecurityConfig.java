@@ -31,7 +31,10 @@ public class SecurityConfig {
             "/movie/**",
             "/seance/**",
             "/my-orders",
-            "/orders/**",
+            "/api/orders/**",
+            "/api/orders",
+            "/logout",
+            "/api/movies",
     };
 
     @Bean

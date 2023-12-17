@@ -21,4 +21,6 @@ public interface IOrderService {
 
     Map<Movie, Integer> getMoviesDailyStats(LocalDate date);
 
+    Double getDailyTotalIncome(LocalDate date);
+
 }

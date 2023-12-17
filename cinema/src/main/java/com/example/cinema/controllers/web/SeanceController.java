@@ -1,4 +1,4 @@
-package com.example.cinema.controllers;
+package com.example.cinema.controllers.web;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
