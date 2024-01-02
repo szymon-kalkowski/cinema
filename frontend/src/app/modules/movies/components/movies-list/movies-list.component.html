@@ -1,1 +1,5 @@
-<p>movies component</p>
+<div class="flex flex-wrap w-full">
+  @for (movie of movies; track $index) {
+  <app-movie-card class="w-full lg:w-1/2 p-5" [movie]="movie"></app-movie-card>
+  }
+</div>

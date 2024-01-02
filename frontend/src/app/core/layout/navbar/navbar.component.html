@@ -28,7 +28,15 @@
         >
           {{ link.label }}
         </li>
-        }
+        } @if (auth.isAuthenticated$ | async) { @for (link of adminLinks; track
+        $index) {
+        <li
+          class="cursor-pointer p-2 hover:bg-base-100 rounded-lg text-primary"
+          routerLink="{{ link.path }}"
+        >
+          {{ link.label }}
+        </li>
+        } }
       </ul>
     </div>
   </div>
@@ -36,6 +44,19 @@
     <div routerLink="/" class="btn btn-ghost text-xl">CINEMA</div>
   </div>
   <div class="navbar-end">
-    <button class="btn btn-primary">Login</button>
+    @if (auth.isAuthenticated$ | async) {
+    <button
+      class="btn btn-primary"
+      (click)="
+        auth.logout({ logoutParams: { returnTo: document.location.origin } })
+      "
+    >
+      Logout
+    </button>
+    } @else {
+    <button class="btn btn-primary" (click)="auth.loginWithRedirect()">
+      Login
+    </button>
+    }
   </div>
 </div>

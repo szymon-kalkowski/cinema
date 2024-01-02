@@ -35,6 +35,7 @@ public class SecurityConfig {
             "/api/orders",
             "/logout",
             "/api/movies",
+            "/api/movies/**",
     };
 
     @Bean
@@ -43,6 +44,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(URL_WHITELIST).permitAll()
                         .anyRequest().authenticated())
+                .cors(withDefaults())
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()))
                 .oauth2Login(withDefaults())
 
                 .logout(logout -> logout

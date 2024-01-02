@@ -2,10 +2,10 @@ import { Component, Input } from '@angular/core';
 import { ReadMovie } from '../../../../features/dto/movie/ReadMovie.model';
 
 @Component({
-  selector: 'app-movie-card',
-  templateUrl: './movie-card.component.html',
-  styleUrl: './movie-card.component.scss',
+  selector: 'app-movie-details',
+  templateUrl: './movie-details.component.html',
+  styleUrl: './movie-details.component.scss',
 })
-export class MovieCardComponent {
+export class MovieDetailsComponent {
   @Input() public movie: ReadMovie = {} as ReadMovie;
 }
