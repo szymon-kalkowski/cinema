@@ -1,0 +1,31 @@
+<button class="btn btn-primary mb-5" routerLink="/">&#8592; Home</button>
+
+<div class="flex justify-between p-2 my-3">
+  <h2 class="text-2xl font-bold">Repertoire</h2>
+  <h2 class="text-2xl font-bold">{{ date }}</h2>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Movie</th>
+      <th scope="col">Time</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (movie of repertoire | keyvalue; track $index) {
+    <tr class="hover">
+      <td>{{ movie.key }}</td>
+      <td>
+        @for (seance of movie.value; track $index) {
+        <span
+          class="mr-3 cursor-pointer text-primary"
+          [routerLink]="'/repertoire/seances/' + seance.id"
+          >{{ seance.time | time }}</span
+        >
+        }
+      </td>
+    </tr>
+    }
+  </tbody>
+</table>

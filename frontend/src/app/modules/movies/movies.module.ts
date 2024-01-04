@@ -8,9 +8,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../../shared/shared.module';
 import { MovieComponent } from './pages/movie/movie.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
+import { AddMovieComponent } from './pages/add-movie/add-movie.component';
 
 @NgModule({
-  declarations: [MoviesListComponent, MovieCardComponent, MainComponent, MovieComponent, MovieDetailsComponent],
+  declarations: [
+    MoviesListComponent,
+    MovieCardComponent,
+    MainComponent,
+    MovieComponent,
+    MovieDetailsComponent,
+    AddMovieComponent,
+  ],
   imports: [CommonModule, MoviesRoutingModule, HttpClientModule, SharedModule],
+  exports: [MovieDetailsComponent],
 })
 export class MoviesModule {}

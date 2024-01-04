@@ -23,4 +23,6 @@ public interface ISeanceService {
 
     Map<Movie, List<Seance>> getRepertoire(LocalDate date);
 
+    Map<String, List<Seance>> getApiRepertoire(LocalDate date);
+
 }

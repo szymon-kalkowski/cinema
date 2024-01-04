@@ -20,12 +20,12 @@ export class NavbarComponent {
 
   public links: RouterLink[] = [
     { label: 'Movies', path: '/movies' },
-    { label: 'Reperoire', path: '/reperoire' },
+    { label: 'Repertoire', path: '/repertoire' },
   ];
 
   public adminLinks: RouterLink[] = [
     { label: 'Add movie', path: '/movies/add' },
-    { label: 'Add seance', path: '/reperoire/add' },
+    { label: 'Add seance', path: '/repertoire/add' },
     { label: 'Statistics', path: '/statistics' },
     { label: 'Orders', path: '/orders' },
   ];

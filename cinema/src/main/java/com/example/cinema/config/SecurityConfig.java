@@ -36,6 +36,8 @@ public class SecurityConfig {
             "/logout",
             "/api/movies",
             "/api/movies/**",
+            "/api/repertoire/**",
+            "/api/repertoire/seances/**",
     };
 
     @Bean

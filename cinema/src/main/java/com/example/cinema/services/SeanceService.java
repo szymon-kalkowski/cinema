@@ -62,4 +62,19 @@ public class SeanceService implements ISeanceService {
 
         return groupedSeances;
     }
+
+    @Override
+    public Map<String, List<Seance>> getApiRepertoire(LocalDate date) {
+        List<Seance> seances = getSeancesByDate(date);
+
+        Map<String, List<Seance>> groupedSeances = seances.stream()
+                .collect(Collectors.groupingBy(seance -> seance.getMovie().getTitle(), Collectors.toList()));
+
+        groupedSeances.forEach((title, seancesList) -> {
+            seancesList.sort((s1, s2) -> s1.getTime().compareTo(s2.getTime()));
+        });
+
+        return groupedSeances;
+    }
+
 }

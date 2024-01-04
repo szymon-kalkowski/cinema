@@ -9,6 +9,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { apiInterceptor } from './core/interceptors/api.interceptor';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { SharedModule } from './shared/shared.module';
+import { RepertoireModule } from './modules/repertoire/repertoire.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -16,6 +17,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserModule,
     AppRoutingModule,
     MoviesModule,
+    RepertoireModule,
     CoreModule,
     SharedModule,
     AuthModule.forRoot({
