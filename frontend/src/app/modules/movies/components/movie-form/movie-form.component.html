@@ -1,0 +1,149 @@
+<form
+  [formGroup]="movieForm"
+  (ngSubmit)="onSubmit()"
+  class="flex flex-col w-full md:w-1/2 lg:w-1/3 mx-auto"
+>
+  <div class="my-3">
+    <label for="title">Title</label>
+    <input
+      type="text"
+      id="title"
+      formControlName="title"
+      class="input input-bordered w-full"
+    />
+    @if (movieForm.controls['title'].errors?.['required'] &&
+    movieForm.controls['title'].dirty) {
+    <div class="text-error">Title is required</div>
+    }
+  </div>
+
+  <div class="my-3">
+    <label for="description">Description</label>
+    <textarea
+      id="description"
+      formControlName="description"
+      class="textarea textarea-bordered w-full"
+    ></textarea>
+    @if (movieForm.controls['description'].errors?.['required'] &&
+    movieForm.controls['description'].dirty) {
+    <div class="text-error">Description is required</div>
+    }
+  </div>
+
+  <div class="my-3">
+    <label for="genres">Genres</label>
+    <select
+      id="genres"
+      formControlName="genres"
+      class="select select-bordered w-full"
+      multiple
+    >
+      @for (genre of genres; track $index) {
+      <option [value]="genre">{{ genre }}</option>
+      }
+    </select>
+    @if (movieForm.controls['genres'].errors?.['required'] &&
+    movieForm.controls['genres'].dirty) {
+    <div class="text-error">Genres are required</div>
+    }
+  </div>
+
+  <div class="my-3">
+    <label for="duration">Duration (min)</label>
+    <input
+      type="number"
+      id="duration"
+      formControlName="duration"
+      class="input input-bordered w-full"
+    />
+    @if (movieForm.controls['duration'].errors?.['required'] &&
+    movieForm.controls['duration'].dirty) {
+    <div class="text-error">Duration is required</div>
+    } @if (movieForm.controls['duration'].errors?.['min'] &&
+    movieForm.controls['duration'].dirty) {
+    <div class="text-error">Minimum duration: 1min</div>
+    }
+  </div>
+
+  <div class="my-3">
+    <label for="year">Year</label>
+    <input
+      type="number"
+      id="year"
+      formControlName="year"
+      class="input input-bordered w-full"
+    />
+    @if (movieForm.controls['year'].errors?.['required'] &&
+    movieForm.controls['year'].dirty) {
+    <div class="text-error">Year is required</div>
+    }@if (movieForm.controls['year'].errors?.['min'] &&
+    movieForm.controls['year'].dirty) {
+    <div class="text-error">First movie was recorded in 1888</div>
+    }@if (movieForm.controls['year'].errors?.['max'] &&
+    movieForm.controls['year'].dirty) {
+    <div class="text-error">Movie can't be in the future</div>
+    }
+  </div>
+
+  <div class="my-3">
+    <label for="imageURL">Imgae URL</label>
+    <input
+      type="text"
+      id="imageURL"
+      formControlName="imageURL"
+      class="input input-bordered w-full my-3"
+    />
+    @if (movieForm.controls['imageURL'].errors?.['required'] &&
+    movieForm.controls['imageURL'].dirty) {
+    <div class="text-error">Image is required</div>
+    }
+  </div>
+
+  <form formArrayName="actors" class="my-3">
+    <div>Actors</div>
+    <button class="btn btn-primary w-full" type="button" (click)="addActor()">
+      + Add Actor
+    </button>
+
+    @for (actorForm of actors.controls; track $index) {
+    <app-actor-form [actorForm]="actorForm"></app-actor-form>
+    <button
+      class="btn btn-error w-full"
+      type="button"
+      (click)="removeActor($index)"
+    >
+      - Remove Actor
+    </button>
+    }
+  </form>
+
+  <form formArrayName="directors" class="my-3">
+    <div>Directors</div>
+    <button
+      class="btn btn-primary w-full"
+      type="button"
+      (click)="addDirector()"
+    >
+      + Add Director
+    </button>
+
+    @for (directorForm of directors.controls; track $index) {
+    <app-director-form [directorForm]="directorForm"></app-director-form>
+    <button
+      class="btn btn-error w-full"
+      type="button"
+      (click)="removeDirector($index)"
+    >
+      - Remove Director
+    </button>
+    }
+  </form>
+
+  <button
+    type="submit"
+    class="btn btn-primary my-5"
+    [disabled]="!movieForm.valid"
+  >
+    Submit
+  </button>
+</form>

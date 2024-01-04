@@ -26,6 +26,11 @@ public class ActorService implements IActorService {
     }
 
     @Override
+    public Actor getActorByName(String name) {
+        return actorRepository.findByName(name);
+    }
+
+    @Override
     public Actor createActor(Actor actor) {
         return actorRepository.insert(actor);
     }

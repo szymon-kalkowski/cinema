@@ -10,6 +10,8 @@ public interface IDirectorService {
 
     Director getDirectorById(String id);
 
+    Director getDirectorByName(String name);
+
     Director createDirector(Director director);
 
     Director updateDirector(Director director);

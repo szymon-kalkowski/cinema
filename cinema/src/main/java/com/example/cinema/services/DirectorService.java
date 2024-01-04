@@ -26,6 +26,11 @@ public class DirectorService implements IDirectorService {
     }
 
     @Override
+    public Director getDirectorByName(String name) {
+        return directorRepository.findByName(name);
+    }
+
+    @Override
     public Director createDirector(Director director) {
         return directorRepository.insert(director);
     }

@@ -10,6 +10,8 @@ public interface IActorService {
 
     Actor getActorById(String id);
 
+    Actor getActorByName(String name);
+
     Actor createActor(Actor actor);
 
     Actor updateActor(Actor actor);

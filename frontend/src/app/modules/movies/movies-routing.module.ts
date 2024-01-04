@@ -4,6 +4,7 @@ import { MainComponent } from './pages/main/main.component';
 import { MovieComponent } from './pages/movie/movie.component';
 import { AddMovieComponent } from './pages/add-movie/add-movie.component';
 import { adminGuard } from '../../core/guards/admin.guard';
+import { UpdateMovieComponent } from './pages/update-movie/update-movie.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,11 @@ const routes: Routes = [
   {
     path: 'add',
     component: AddMovieComponent,
+    canActivate: [adminGuard],
+  },
+  {
+    path: 'update/:id',
+    component: UpdateMovieComponent,
     canActivate: [adminGuard],
   },
   {

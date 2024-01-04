@@ -1,0 +1,32 @@
+<form [formGroup]="actorForm">
+  <div class="my-3">
+    <label for="name">Name</label>
+    <input
+      type="text"
+      id="name"
+      formControlName="name"
+      class="input input-bordered w-full"
+    />
+    @if (actorForm.controls['name'].errors?.['required'] &&
+    actorForm.controls['name'].dirty) {
+    <div class="text-error">Name is required</div>
+    }
+  </div>
+
+  <div class="my-3">
+    <label for="birthYear">Birth year</label>
+    <input
+      type="number"
+      id="birthYear"
+      formControlName="birthYear"
+      class="input input-bordered w-full"
+    />
+    @if (actorForm.controls['birthYear'].errors?.['required'] &&
+    actorForm.controls['birthYear'].dirty) {
+    <div class="text-error">Birth year is required</div>
+    } @if (actorForm.controls['birthYear'].errors?.['max'] &&
+    actorForm.controls['birthYear'].dirty) {
+    <div class="text-error">Actor can't be born in the future</div>
+    }
+  </div>
+</form>
