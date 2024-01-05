@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ReadMovie } from '../../dto/movie/ReadMovie.model';
 import { WriteMovie } from '../../dto/movie/WriteMovie.model';
+import { Id } from '../../dto/id/id.model';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +27,10 @@ export class MoviesService {
 
   public update(id: string, movie: WriteMovie): Observable<ReadMovie> {
     return this.http.put<ReadMovie>(`${this.url}/${id}`, movie);
+  }
+
+  public delete(id: string): Observable<Id> {
+    return this.http.delete<Id>(`${this.url}/${id}`);
   }
 
   public getGenres(): Observable<string[]> {

@@ -14,6 +14,7 @@ import { MoviesService } from '../../../../features/services/movies/movies.servi
 import { ReadMovie } from '../../../../features/dto/movie/ReadMovie.model';
 import { ReadDirector } from '../../../../features/dto/director/ReadDirector.model';
 import { ReadActor } from '../../../../features/dto/actor/ReadActor.model';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-movie-form',
@@ -163,13 +164,31 @@ export class MovieFormComponent implements OnChanges {
       this.moviesService
         .update(this.movie.id, newMovie)
         .subscribe((movie: ReadMovie) => {
-          // eslint-disable-next-line no-console
-          console.log(movie);
+          Swal.fire({
+            icon: 'success',
+            title: 'Success!',
+            text: `Movie "${movie.title}" has been updated.`,
+            background: '#191e24',
+            buttonsStyling: false,
+            customClass: {
+              confirmButton: 'btn btn-primary',
+            },
+            color: '#ffffff',
+          });
         });
     } else {
       this.moviesService.add(newMovie).subscribe((movie: ReadMovie) => {
-        // eslint-disable-next-line no-console
-        console.log(movie);
+        Swal.fire({
+          icon: 'success',
+          title: 'Success!',
+          text: `Movie "${movie.title}" has been added.`,
+          background: '#191e24',
+          buttonsStyling: false,
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          color: '#ffffff',
+        });
       });
 
       this.reset();

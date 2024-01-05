@@ -5,8 +5,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.cinema.dto.Id;
 import com.example.cinema.dto.WriteActor;
 import com.example.cinema.dto.WriteDirector;
 import com.example.cinema.dto.WriteMovie;
@@ -120,6 +122,12 @@ public class ApiMoviesController {
         movie.setDirectors(directorsList);
         movieService.updateMovie(movie);
         return movie;
+    }
+
+    @DeleteMapping("/api/movies/{id}")
+    public Id deleteMovie(@PathVariable("id") String id) {
+        movieService.deleteMovie(id);
+        return new Id(id);
     }
 
     @GetMapping("/api/genres")
