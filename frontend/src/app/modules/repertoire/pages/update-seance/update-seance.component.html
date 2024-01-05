@@ -1,1 +1,8 @@
-<p>update-seance works!</p>
+<button
+  class="btn btn-primary mb-5"
+  [routerLink]="'/repertoire/seances/' + seance.id"
+>
+  &#8592; Back
+</button>
+
+<app-seance-form [seance]="seance"></app-seance-form>

@@ -11,10 +11,12 @@
       formControlName="title"
       class="input input-bordered w-full"
     />
-    @if (movieForm.controls['title'].errors?.['required'] &&
-    movieForm.controls['title'].dirty) {
-    <div class="text-error">Title is required</div>
-    }
+    <div class="h-1">
+      @if (movieForm.controls['title'].errors?.['required'] &&
+      movieForm.controls['title'].dirty) {
+      <div class="text-error">Title is required</div>
+      }
+    </div>
   </div>
 
   <div class="my-3">
@@ -24,10 +26,12 @@
       formControlName="description"
       class="textarea textarea-bordered w-full"
     ></textarea>
-    @if (movieForm.controls['description'].errors?.['required'] &&
-    movieForm.controls['description'].dirty) {
-    <div class="text-error">Description is required</div>
-    }
+    <div class="h-1">
+      @if (movieForm.controls['description'].errors?.['required'] &&
+      movieForm.controls['description'].dirty) {
+      <div class="text-error">Description is required</div>
+      }
+    </div>
   </div>
 
   <div class="my-3">
@@ -42,10 +46,12 @@
       <option [value]="genre">{{ genre }}</option>
       }
     </select>
-    @if (movieForm.controls['genres'].errors?.['required'] &&
-    movieForm.controls['genres'].dirty) {
-    <div class="text-error">Genres are required</div>
-    }
+    <div class="h-1">
+      @if (movieForm.controls['genres'].errors?.['required'] &&
+      movieForm.controls['genres'].dirty) {
+      <div class="text-error">Genres are required</div>
+      }
+    </div>
   </div>
 
   <div class="my-3">
@@ -56,13 +62,15 @@
       formControlName="duration"
       class="input input-bordered w-full"
     />
-    @if (movieForm.controls['duration'].errors?.['required'] &&
-    movieForm.controls['duration'].dirty) {
-    <div class="text-error">Duration is required</div>
-    } @if (movieForm.controls['duration'].errors?.['min'] &&
-    movieForm.controls['duration'].dirty) {
-    <div class="text-error">Minimum duration: 1min</div>
-    }
+    <div class="h-1">
+      @if (movieForm.controls['duration'].errors?.['required'] &&
+      movieForm.controls['duration'].dirty) {
+      <div class="text-error">Duration is required</div>
+      } @if (movieForm.controls['duration'].errors?.['min'] &&
+      movieForm.controls['duration'].dirty) {
+      <div class="text-error">Minimum duration: 1min</div>
+      }
+    </div>
   </div>
 
   <div class="my-3">
@@ -73,16 +81,18 @@
       formControlName="year"
       class="input input-bordered w-full"
     />
-    @if (movieForm.controls['year'].errors?.['required'] &&
-    movieForm.controls['year'].dirty) {
-    <div class="text-error">Year is required</div>
-    }@if (movieForm.controls['year'].errors?.['min'] &&
-    movieForm.controls['year'].dirty) {
-    <div class="text-error">First movie was recorded in 1888</div>
-    }@if (movieForm.controls['year'].errors?.['max'] &&
-    movieForm.controls['year'].dirty) {
-    <div class="text-error">Movie can't be in the future</div>
-    }
+    <div class="h-1">
+      @if (movieForm.controls['year'].errors?.['required'] &&
+      movieForm.controls['year'].dirty) {
+      <div class="text-error">Year is required</div>
+      }@if (movieForm.controls['year'].errors?.['min'] &&
+      movieForm.controls['year'].dirty) {
+      <div class="text-error">First movie was recorded in 1888</div>
+      }@if (movieForm.controls['year'].errors?.['max'] &&
+      movieForm.controls['year'].dirty) {
+      <div class="text-error">Movie can't be in the future</div>
+      }
+    </div>
   </div>
 
   <div class="my-3">
@@ -93,10 +103,12 @@
       formControlName="imageURL"
       class="input input-bordered w-full my-3"
     />
-    @if (movieForm.controls['imageURL'].errors?.['required'] &&
-    movieForm.controls['imageURL'].dirty) {
-    <div class="text-error">Image is required</div>
-    }
+    <div class="h-1">
+      @if (movieForm.controls['imageURL'].errors?.['required'] &&
+      movieForm.controls['imageURL'].dirty) {
+      <div class="text-error">Image is required</div>
+      }
+    </div>
   </div>
 
   <form formArrayName="actors" class="my-3">

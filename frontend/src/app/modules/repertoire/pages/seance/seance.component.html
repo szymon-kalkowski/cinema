@@ -1,5 +1,24 @@
-<button class="btn btn-primary mb-5" routerLink="/repertoire">
-  &#8592; Back
-</button>
+@if (seance) {
+<div class="flex justify-between">
+  <div>
+    <button class="btn btn-primary mb-5" routerLink="/repertoire">
+      &#8592; Back
+    </button>
+  </div>
+  @if (auth.isAuthenticated$ | async) {
+  <div>
+    <button
+      class="btn btn-primary mb-5 mr-2"
+      [routerLink]="'/repertoire/seances/update/' + seance.id"
+    >
+      Edit
+    </button>
+    <button class="btn btn-error mb-5" (click)="deleteSeance()">Delete</button>
+  </div>
+  }
+</div>
 
-<app-movie-details [movie]="seance && seance.movie"></app-movie-details>
+<app-movie-details [movie]="seance.movie"></app-movie-details>
+} @else {
+<app-loading></app-loading>
+}

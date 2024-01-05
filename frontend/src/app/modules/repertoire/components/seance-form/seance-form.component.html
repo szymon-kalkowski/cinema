@@ -1,1 +1,79 @@
-<p>seance-form works!</p>
+<form
+  [formGroup]="seanceForm"
+  (ngSubmit)="onSubmit()"
+  class="flex flex-col w-full md:w-1/2 lg:w-1/3 mx-auto"
+>
+  <div class="my-3">
+    <label for="movie">Movie</label>
+    <select
+      id="movie"
+      formControlName="movieId"
+      class="select select-bordered w-full"
+    >
+      @for (movie of movies; track $index) {
+      <option [value]="movie.id">{{ movie.title }}</option>
+      }
+    </select>
+    <div class="h-1">
+      @if (seanceForm.controls['movieId'].errors?.['required'] &&
+      seanceForm.controls['movieId'].dirty) {
+      <div class="text-error">Movie is required</div>
+      }
+    </div>
+  </div>
+
+  <div class="my-3">
+    <label for="room">Room</label>
+    <input
+      type="number"
+      id="room"
+      formControlName="room"
+      class="input input-bordered w-full"
+    />
+    <div class="h-1">
+      @if (seanceForm.controls['room'].errors?.['required'] &&
+      seanceForm.controls['room'].dirty) {
+      <div class="text-error">Room is required</div>
+      } @if (seanceForm.controls['room'].errors?.['min'] &&
+      seanceForm.controls['room'].dirty) {
+      <div class="text-error">Room must be greater than 0</div>
+      }
+    </div>
+  </div>
+
+  <div class="my-3">
+    <label for="date">Date</label>
+    <input
+      type="date"
+      id="date"
+      formControlName="date"
+      class="input input-bordered w-full"
+    />
+    <div class="h-1">
+      @if (seanceForm.controls['date'].errors?.['required'] &&
+      seanceForm.controls['date'].dirty) {
+      <div class="text-error">Date is required</div>
+      }
+    </div>
+  </div>
+
+  <div class="my-3">
+    <label for="time">Time</label>
+    <input
+      type="time"
+      id="time"
+      formControlName="time"
+      class="input input-bordered w-full"
+    />
+    <div class="h-1">
+      @if (seanceForm.controls['time'].errors?.['required'] &&
+      seanceForm.controls['time'].dirty) {
+      <div class="text-error">Time is required</div>
+      }
+    </div>
+  </div>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!seanceForm.valid">
+    Submit
+  </button>
+</form>

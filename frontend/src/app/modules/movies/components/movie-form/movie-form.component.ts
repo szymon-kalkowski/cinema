@@ -70,7 +70,7 @@ export class MovieFormComponent implements OnChanges {
         ]
       ),
       directors: new FormArray<FormGroup<DirectorForm>>(
-        this.movie
+        this.movie?.directors
           ? this.movie.directors.map((director: ReadDirector) => {
               return new FormGroup<DirectorForm>({
                 name: new FormControl<string | null>(director.name, [
@@ -85,7 +85,7 @@ export class MovieFormComponent implements OnChanges {
           : []
       ),
       actors: new FormArray<FormGroup<ActorForm>>(
-        this.movie
+        this.movie?.actors
           ? this.movie.actors.map((actor: ReadActor) => {
               return new FormGroup<ActorForm>({
                 name: new FormControl<string | null>(actor.name, [
@@ -195,7 +195,7 @@ export class MovieFormComponent implements OnChanges {
     }
   }
 
-  public reset(): void {
+  private reset(): void {
     this.movieForm.reset();
   }
 }

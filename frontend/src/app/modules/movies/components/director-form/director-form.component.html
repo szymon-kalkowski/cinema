@@ -7,10 +7,12 @@
       formControlName="name"
       class="input input-bordered w-full"
     />
-    @if (directorForm.controls['name'].errors?.['required'] &&
-    directorForm.controls['name'].dirty) {
-    <div class="text-error">Name is required</div>
-    }
+    <div class="h-1">
+      @if (directorForm.controls['name'].errors?.['required'] &&
+      directorForm.controls['name'].dirty) {
+      <div class="text-error">Name is required</div>
+      }
+    </div>
   </div>
 
   <div class="my-3">
@@ -21,12 +23,14 @@
       formControlName="birthYear"
       class="input input-bordered w-full"
     />
-    @if (directorForm.controls['birthYear'].errors?.['required'] &&
-    directorForm.controls['birthYear'].dirty) {
-    <div class="text-error">Birth year is required</div>
-    } @if (directorForm.controls['birthYear'].errors?.['max'] &&
-    directorForm.controls['birthYear'].dirty) {
-    <div class="text-error">Director can't be born in the future</div>
-    }
+    <div class="h-1">
+      @if (directorForm.controls['birthYear'].errors?.['required'] &&
+      directorForm.controls['birthYear'].dirty) {
+      <div class="text-error">Birth year is required</div>
+      } @if (directorForm.controls['birthYear'].errors?.['max'] &&
+      directorForm.controls['birthYear'].dirty) {
+      <div class="text-error">Director can't be born in the future</div>
+      }
+    </div>
   </div>
 </form>

@@ -9,17 +9,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './update-movie.component.scss',
 })
 export class UpdateMovieComponent {
-  public movie: ReadMovie = {
-    id: '',
-    title: '',
-    description: '',
-    genres: [],
-    duration: 0,
-    year: 0,
-    actors: [],
-    directors: [],
-    imageURL: '',
-  };
+  public movie: ReadMovie = {} as ReadMovie;
   private id: string = '';
 
   public constructor(
