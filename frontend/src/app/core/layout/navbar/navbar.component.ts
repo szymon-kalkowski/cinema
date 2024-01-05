@@ -26,7 +26,7 @@ export class NavbarComponent {
   public adminLinks: RouterLink[] = [
     { label: 'Add movie', path: '/movies/add' },
     { label: 'Add seance', path: '/repertoire/seances/add' },
-    { label: 'Statistics', path: '/statistics' },
-    { label: 'Orders', path: '/orders' },
+    { label: 'Statistics', path: '/admin/statistics' },
+    { label: 'Orders', path: '/admin/orders' },
   ];
 }

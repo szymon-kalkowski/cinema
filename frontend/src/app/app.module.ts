@@ -10,6 +10,7 @@ import { apiInterceptor } from './core/interceptors/api.interceptor';
 import { authInterceptor } from './core/interceptors/auth.interceptor';
 import { SharedModule } from './shared/shared.module';
 import { RepertoireModule } from './modules/repertoire/repertoire.module';
+import { AdminModule } from './modules/admin/admin.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { RepertoireModule } from './modules/repertoire/repertoire.module';
     AppRoutingModule,
     MoviesModule,
     RepertoireModule,
+    AdminModule,
     CoreModule,
     SharedModule,
     AuthModule.forRoot({

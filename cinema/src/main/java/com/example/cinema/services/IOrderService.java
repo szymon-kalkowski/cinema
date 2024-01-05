@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
+import com.example.cinema.dto.ReadStatistics;
 import com.example.cinema.models.Movie;
 import com.example.cinema.models.Order;
 
@@ -22,5 +23,7 @@ public interface IOrderService {
     Map<Movie, Integer> getMoviesDailyStats(LocalDate date);
 
     Double getDailyTotalIncome(LocalDate date);
+
+    ReadStatistics getReadStatistics(LocalDate date);
 
 }

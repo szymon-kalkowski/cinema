@@ -2,6 +2,7 @@
 
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { NoPageFoundComponent } from './core/layout/no-page-found/no-page-found.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,15 @@ const routes: Routes = [
       import('./modules/repertoire/repertoire.module').then(
         (m) => m.RepertoireModule
       ),
+  },
+  {
+    path: 'admin',
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: '**',
+    component: NoPageFoundComponent,
   },
 ];
 

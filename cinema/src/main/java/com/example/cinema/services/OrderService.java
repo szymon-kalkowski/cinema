@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.example.cinema.dto.ReadStatistics;
 import com.example.cinema.models.Movie;
 import com.example.cinema.models.Order;
 import com.example.cinema.repositories.OrderRepository;
@@ -67,5 +68,16 @@ public class OrderService implements IOrderService {
         Double totalIncome = moviesStats.entrySet().stream()
                 .map(entry -> entry.getValue() * 10.0).reduce(0.0, Double::sum);
         return totalIncome;
+    }
+
+    @Override
+    public ReadStatistics getReadStatistics(LocalDate date) {
+        Map<String, Integer> moviesStats = getMoviesDailyStats(date)
+                .entrySet()
+                .stream()
+                .collect(Collectors.toMap(entry -> entry.getKey().getTitle(), Map.Entry::getValue));
+        Double totalIncome = getDailyTotalIncome(date);
+
+        return new ReadStatistics(moviesStats, totalIncome);
     }
 }
