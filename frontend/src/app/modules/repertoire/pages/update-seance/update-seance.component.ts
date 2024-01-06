@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ReadSeance } from '../../../../features/dto/repertoire/ReadSeance.model';
+import { ReadSeance } from '../../../../features/dto/seance/ReadSeance.model';
 import { RepertoireService } from '../../../../features/services/repertoire/repertoire.service';
 import { ActivatedRoute } from '@angular/router';
 

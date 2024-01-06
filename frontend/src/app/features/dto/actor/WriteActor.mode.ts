@@ -1,4 +1,4 @@
 export interface WriteActor {
-  name: string;
-  birthYear: number;
+  readonly name: string;
+  readonly birthYear: number;
 }

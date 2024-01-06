@@ -1,5 +1,5 @@
 import { ReadPerson } from '../client/ReadPerson';
-import { ReadSeance } from '../repertoire/ReadSeance.model';
+import { ReadSeance } from '../seance/ReadSeance.model';
 
 export interface ReadOrder {
   readonly id: string;

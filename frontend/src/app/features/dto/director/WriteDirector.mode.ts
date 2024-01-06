@@ -1,4 +1,4 @@
 export interface WriteDirector {
-  name: string;
-  birthYear: number;
+  readonly name: string;
+  readonly birthYear: number;
 }

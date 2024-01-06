@@ -19,6 +19,80 @@
 </div>
 
 <app-movie-details [movie]="seance.movie"></app-movie-details>
+
+<h2 class="text-4xl text-center my-5">SEANCE</h2>
+<div class="text-lg">Room: {{ seance.room }}</div>
+<div class="flex justify-between my-3">
+  <div class="text-2xl">Date: {{ seance.date | date }}</div>
+  <div class="text-2xl">Time: {{ seance.time | time }}</div>
+</div>
+<div class="w-3/4 mx-auto bg-base-300 text-center p-3 my-10">SCREEN</div>
+<div class="flex flex-col items-center">
+  @for (row of seance.hall.seats; track row; let rowIndex = $index) {
+  <div class="flex flex-row">
+    <div class="flex justify-center items-center mx-2">{{ rowIndex }}</div>
+    @for (seat of row; track seat; let columnIndex = $index) {
+    <button
+      [disabled]="seat"
+      [ngClass]="
+        'w-10 btn h-10 text-center m-1 flex justify-center items-center ' +
+        (isSeatSelected(rowIndex, columnIndex)
+          ? 'btn-secondary'
+          : 'btn-primary')
+      "
+      (click)="toggleSeat(rowIndex, columnIndex)"
+    >
+      {{ columnIndex }}
+    </button>
+    }
+  </div>
+  }
+</div>
+<h2 class="text-center text-3xl mt-5">Order tickets</h2>
+<h5 class="text-center text-xl my-3">One ticket price: $10</h5>
+<form
+  [formGroup]="orderForm"
+  (ngSubmit)="onSubmit()"
+  class="flex flex-col w-full mx-auto my-3"
+>
+  <div class="my-3">
+    <label for="name">Name</label>
+    <input
+      type="text"
+      id="name"
+      formControlName="name"
+      class="input input-bordered w-full"
+    />
+    <div class="h-1">
+      @if (orderForm.controls['name'].errors?.['required'] &&
+      orderForm.controls['name'].dirty) {
+      <div class="text-error">Name is required</div>
+      }
+    </div>
+  </div>
+  <div class="my-3">
+    <label for="email">Email</label>
+    <input
+      type="email"
+      id="email"
+      formControlName="email"
+      class="input input-bordered w-full"
+    />
+    <div class="h-1">
+      @if (orderForm.controls['email'].errors?.['required'] &&
+      orderForm.controls['email'].dirty) {
+      <div class="text-error">Email is required</div>
+      }
+    </div>
+  </div>
+  <button
+    type="submit"
+    class="btn btn-primary w-full"
+    [disabled]="!orderForm.valid || selectedSeats.length === 0"
+  >
+    Order
+  </button>
+</form>
 } @else {
 <app-loading></app-loading>
 }

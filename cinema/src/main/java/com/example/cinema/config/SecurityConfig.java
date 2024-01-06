@@ -41,6 +41,7 @@ public class SecurityConfig {
             "/api/movies/**",
             "/api/repertoire/**",
             "/api/repertoire/seances/**",
+            "/api/repertoire/seances/**/orders",
     };
 
     @Bean

@@ -1,4 +1,4 @@
-import { ReadSeance } from '../repertoire/ReadSeance.model';
+import { ReadSeance } from '../seance/ReadSeance.model';
 import { ReadPerson } from './ReadPerson';
 
 export interface ReadOrder {

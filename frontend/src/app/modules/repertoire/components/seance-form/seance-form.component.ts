@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { ReadSeance } from '../../../../features/dto/repertoire/ReadSeance.model';
+import { ReadSeance } from '../../../../features/dto/seance/ReadSeance.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { SeanceForm } from '../../models/seanceForm.model';
 import { RepertoireService } from '../../../../features/services/repertoire/repertoire.service';
