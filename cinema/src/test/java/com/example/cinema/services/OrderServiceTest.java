@@ -108,13 +108,13 @@ public class OrderServiceTest {
         order2.setSeats(List.of("row-3-col-2"));
 
         List<Order> orders = List.of(order1, order2);
-        Mockito.when(orderRepository.findAll()).thenReturn(orders);
+        Mockito.when(orderRepository.findBySeanceDate(date)).thenReturn(orders);
 
         // when
         Map<Movie, Integer> result = orderService.getMoviesDailyStats(date);
 
         // then
-        Mockito.verify(orderRepository, Mockito.times(1)).findAll();
+        Mockito.verify(orderRepository, Mockito.times(1)).findBySeanceDate(date);
         assertEquals(result.get(movie), 3);
     }
 
@@ -138,13 +138,13 @@ public class OrderServiceTest {
         order2.setSeats(List.of("row-3-col-2"));
 
         List<Order> orders = List.of(order1, order2);
-        Mockito.when(orderRepository.findAll()).thenReturn(orders);
+        Mockito.when(orderRepository.findBySeanceDate(date)).thenReturn(orders);
 
         // when
         Double result = orderService.getDailyTotalIncome(date);
 
         // then
-        Mockito.verify(orderRepository, Mockito.times(1)).findAll();
+        Mockito.verify(orderRepository, Mockito.times(1)).findBySeanceDate(date);
         assertEquals(result, 30.0);
     }
 }

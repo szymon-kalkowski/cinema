@@ -82,6 +82,9 @@
       @if (orderForm.controls['email'].errors?.['required'] &&
       orderForm.controls['email'].dirty) {
       <div class="text-error">Email is required</div>
+      } @if (orderForm.controls['email'].errors?.['email'] &&
+      orderForm.controls['email'].dirty) {
+      <div class="text-error">Email is invalid</div>
       }
     </div>
   </div>

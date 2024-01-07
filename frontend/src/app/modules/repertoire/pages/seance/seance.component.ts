@@ -40,7 +40,10 @@ export class SeanceComponent {
       });
     this.orderForm = new FormGroup<OrderForm>({
       name: new FormControl<string | null>(null, [Validators.required]),
-      email: new FormControl<string | null>(null, [Validators.required]),
+      email: new FormControl<string | null>(null, [
+        Validators.required,
+        Validators.email,
+      ]),
     });
   }
 
