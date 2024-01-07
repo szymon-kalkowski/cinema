@@ -36,8 +36,6 @@ public class SecurityConfig {
             "/seance/**",
             "/my-orders",
             "/logout",
-            "/api/orders/**",
-            "/api/orders",
             "/api/movies",
             "/api/movies/**",
             "/api/repertoire/**",

@@ -54,6 +54,11 @@ public class ApiSeanceController {
         return seanceService.getSeanceById(id);
     }
 
+    @GetMapping("/api/repertoire/seances/date/{date}")
+    public List<Seance> getSeancesByDate(@PathVariable("date") String date) {
+        return seanceService.getSeancesByDate(LocalDate.parse(date));
+    }
+
     @PostMapping("/api/repertoire/seances")
     public Seance postSeance(@RequestBody WriteSeance body) {
         Movie movie = movieService.getMovieById(body.movieId());

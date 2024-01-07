@@ -24,6 +24,10 @@ export class RepertoireService {
     return this.http.get<ReadSeance>(`${this.url}/seances/${id}`);
   }
 
+  public getSeancesByDate(date: string): Observable<ReadSeance[]> {
+    return this.http.get<ReadSeance[]>(`${this.url}/seances/date/${date}`);
+  }
+
   public addSeance(seance: WriteSeance): Observable<ReadSeance> {
     return this.http.post<ReadSeance>(`${this.url}/seances`, seance);
   }

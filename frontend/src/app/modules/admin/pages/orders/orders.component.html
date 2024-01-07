@@ -1,1 +1,56 @@
-<p>orders works!</p>
+@if (orders) {
+<button class="btn btn-primary mb-5" routerLink="/">&#8592; Home</button>
+
+<h2 class="text-2xl font-bold text-center">Orders</h2>
+
+<div class="flex justify-between items-center p-2 my-3 flex-wrap">
+  <h2 class="text-2xl font-bold">{{ date | date }}</h2>
+  <form [formGroup]="dateForm" (ngSubmit)="onSubmit()" class="join">
+    <input
+      type="date"
+      class="input input-bordered join-item"
+      formControlName="date"
+    />
+    <button
+      class="btn btn-primary join-item"
+      type="submit"
+      [disabled]="!dateForm.valid"
+    >
+      Submit
+    </button>
+  </form>
+</div>
+
+<select
+  class="select select-bordered join-item"
+  [(ngModel)]="searchBy"
+  (ngModelChange)="prepareOrders()"
+>
+  <option selected [ngValue]="null">All seances</option>
+  @for (seance of seances; track $index) {
+  <option [value]="seance.id">
+    {{ seance.movie.title }} {{ seance.time | time }}
+  </option>
+  }
+</select>
+
+<div>
+  @for (order of displayedOrders; track $index) {
+  <app-order-card [order]="order"></app-order-card>
+  }
+</div>
+
+<div class="join flex justify-center my-5">
+  @for (pageNumber of pages; track $index) {
+  <button
+    class="join-item btn btn-primary"
+    [ngClass]="{ 'btn-active': pageNumber === currentPage }"
+    (click)="changePage(pageNumber)"
+  >
+    {{ pageNumber }}
+  </button>
+  }
+</div>
+} @else {
+<app-loading></app-loading>
+}

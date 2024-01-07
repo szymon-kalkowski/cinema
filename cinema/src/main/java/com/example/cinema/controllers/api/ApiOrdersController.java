@@ -33,6 +33,11 @@ public class ApiOrdersController {
         return orderService.getAllOrders();
     }
 
+    @GetMapping("/api/orders/{date}")
+    public List<Order> getOrdersByDate(@PathVariable("date") String date) {
+        return orderService.getOrdersBySeanceDate(LocalDate.parse(date));
+    }
+
     @DeleteMapping("/api/orders/{id}")
     public String deleteOrder(@PathVariable("id") String id) {
         orderService.deleteOrder(id);

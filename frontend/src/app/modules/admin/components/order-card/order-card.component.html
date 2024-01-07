@@ -1,0 +1,22 @@
+<div class="card bg-base-300 w-full p-2 my-2">
+  <div class="flex justify-between flex-wrap">
+    <h2 class="text-2xl font-bold w-full md:w-auto">
+      {{ order.seance.movie.title }}
+    </h2>
+    <h2 class="text-2xl font-bold w-full md:w-auto">
+      {{ order.seance.date | date }} {{ order.seance.time | time }}
+    </h2>
+  </div>
+  <div class="flex justify-between my-2 flex-wrap">
+    <h2 class="text-xl w-full md:w-auto">{{ order.person.name }}</h2>
+    <h2 class="text-xl w-full md:w-auto">{{ order.person.email }}</h2>
+  </div>
+  <div class="flex justify-between my-2 flex-wrap">
+    <div class="w-full md:w-auto">Room: {{ order.seance.room }}</div>
+    <div class="w-full md:w-auto">
+      @for (seat of order.seats; track $index) {
+      <span class="badge badge-outline mr-2">{{ seat }}</span>
+      }
+    </div>
+  </div>
+</div>

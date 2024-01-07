@@ -26,4 +26,6 @@ public interface IOrderService {
 
     ReadStatistics getReadStatistics(LocalDate date);
 
+    List<Order> getOrdersBySeanceDate(LocalDate date);
+
 }

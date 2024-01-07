@@ -51,9 +51,7 @@ public class OrderService implements IOrderService {
 
     @Override
     public Map<Movie, Integer> getMoviesDailyStats(LocalDate date) {
-        List<Order> orders = getAllOrders();
-        orders = orders.stream().filter(order -> order.getSeance().getDate().equals(date))
-                .collect(Collectors.toList());
+        List<Order> orders = orderRepository.findBySeanceDate(date);
 
         Map<Movie, Integer> moviesStats = orders.stream()
                 .collect(Collectors.groupingBy(order -> order.getSeance().getMovie(),
@@ -79,5 +77,11 @@ public class OrderService implements IOrderService {
         Double totalIncome = getDailyTotalIncome(date);
 
         return new ReadStatistics(moviesStats, totalIncome);
+    }
+
+    @Override
+    public List<Order> getOrdersBySeanceDate(LocalDate date) {
+        List<Order> orders = orderRepository.findBySeanceDate(date);
+        return orders;
     }
 }
