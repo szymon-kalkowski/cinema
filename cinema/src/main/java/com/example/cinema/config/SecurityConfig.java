@@ -14,6 +14,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -34,25 +35,26 @@ public class SecurityConfig {
             "/movie/**",
             "/seance/**",
             "/my-orders",
+            "/logout",
             "/api/orders/**",
             "/api/orders",
-            "/logout",
             "/api/movies",
             "/api/movies/**",
             "/api/repertoire/**",
-            "/api/repertoire/seances/**",
-            "/api/repertoire/seances/**/orders",
+            "/api/repertoire/seances/orders/**",
+            "/api/genres"
     };
 
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(URL_WHITELIST).permitAll()
-                        .anyRequest().authenticated())
                 .cors(withDefaults())
                 .cors(corsConfigurer -> corsConfigurer
                         .configurationSource(corsConfigurationSource()))
+                .authorizeHttpRequests(authorize -> authorize
+                        .requestMatchers(URL_WHITELIST).permitAll()
+                        .anyRequest().authenticated())
+
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()))
                 .oauth2Login(withDefaults())
 
@@ -64,15 +66,28 @@ public class SecurityConfig {
 
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedOrigin("http://localhost:4200");
-        configuration.addAllowedHeader("*");
-        configuration.addAllowedMethod("*");
-        configuration.setAllowCredentials(true);
+        // CorsConfiguration configuration = new CorsConfiguration();
+        // configuration.addAllowedOrigin("http://localhost:4200");
+        // configuration.addAllowedHeader("*");
+        // configuration.addAllowedMethod("*");
+        // configuration.addAllowedMethod(HttpMethod.POST);
+        // configuration.addAllowedMethod(HttpMethod.GET);
+        // configuration.addAllowedMethod(HttpMethod.OPTIONS);
+        // configuration.setAllowCredentials(true);
 
+        // UrlBasedCorsConfigurationSource source = new
+        // UrlBasedCorsConfigurationSource();
+        // source.registerCorsConfiguration("/**", configuration);
+
+        // return source;
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:4200"));
+        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "OPTIONS", "PUT", "DELETE"));
+        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowCredentials(true);
+        configuration.setExposedHeaders(Arrays.asList("Access-Control-Allow-Origin"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
-
         return source;
     }
 
@@ -86,4 +101,5 @@ public class SecurityConfig {
             }
         };
     }
+
 }

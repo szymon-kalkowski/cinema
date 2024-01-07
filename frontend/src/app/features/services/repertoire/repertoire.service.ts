@@ -34,7 +34,7 @@ export class RepertoireService {
 
   public addOrder(seanceId: string, order: WriteOrder): Observable<ReadOrder> {
     return this.http.post<ReadOrder>(
-      `${this.url}/seances/${seanceId}/orders`,
+      `${this.url}/seances/orders/${seanceId}`,
       order
     );
   }

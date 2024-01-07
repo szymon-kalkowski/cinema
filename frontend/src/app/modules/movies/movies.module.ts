@@ -9,7 +9,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { MovieComponent } from './pages/movie/movie.component';
 import { MovieDetailsComponent } from './components/movie-details/movie-details.component';
 import { AddMovieComponent } from './pages/add-movie/add-movie.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ActorFormComponent } from './components/actor-form/actor-form.component';
 import { DirectorFormComponent } from './components/director-form/director-form.component';
 import { MovieFormComponent } from './components/movie-form/movie-form.component';
@@ -34,6 +34,7 @@ import { UpdateMovieComponent } from './pages/update-movie/update-movie.componen
     HttpClientModule,
     SharedModule,
     ReactiveFormsModule,
+    FormsModule,
   ],
   exports: [MovieDetailsComponent],
 })

@@ -78,7 +78,7 @@ public class ApiSeanceController {
         return seance;
     }
 
-    @PostMapping("/api/repertoire/seances/{id}/orders")
+    @PostMapping("/api/repertoire/seances/orders/{id}")
     public Order addOrder(@PathVariable("id") String id, @RequestBody WriteOrder body) {
         Seance seance = seanceService.getSeanceById(id);
 
